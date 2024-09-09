@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ACTION: Inscripción -->
+    <record id="op_schelude_action" model="ir.actions.act_window">
+        <field name="name">Inscripción</field>
+        <field name="res_model">op.schelude</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Inscripción -->
+
+        
+<!-- ====================== MENUS ====================== -->        
+    <menuitem id="op_schelude_menu"
+              name="Schelude"
+              action="op_schelude_action"
+              sequence="35"
+              web_icon="openeducat_inscription,static/description/icon.png"
+    />
+        
+
+</odoo>

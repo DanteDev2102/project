@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- VIEW FORM: Carga de Notas -->
+    <record id="note_charge_view_form" model="ir.ui.view">
+        <field name="name">note.charge.form</field>
+        <field name="model">note.charge</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <group>
+                        <group>
+                            <field name="faculty_id"/>
+                            <field name="vat_faculty"/>
+                            <field name="student_id"/>
+                            <field name="vat_student"/>
+                            <field name="course_id"/>
+                            <field name="study_plan"/>
+                            <field name="batch_id"/>
+                        </group>
+                        <group>
+                            <field name="code"/>
+                            <field name="company_id"/>
+                            <field name="turn"/>
+                            <field name="subject_id"/>
+                            <field name="code_subject"/>
+                            <field name="academic_years_id"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <separator string="Notas" colspan="4"/>
+                    <field name="line_ids" colspan="4" nolabel="1">
+                        <tree editable="top" multi_edit="1" sample="1">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="note_percentage" sum="%"/>
+                            <field name="note_qty" sum="Acumulado"/>
+                            <field name="note" sum="Final"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- END VIEW FORM: Carga de Notas -->
+
+    <!-- VIEW TREE: Carga de Notas -->
+    <record id="note_charge_view_tree" model="ir.ui.view">
+        <field name="name">note.charge.tree</field>
+        <field name="model">note.charge</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1" sample="1">
+                <field name="code"/>
+                <field name="faculty_id"/>
+                <field name="vat_faculty"/>
+                <field name="student_id"/>
+                <field name="vat_student"/>
+                <field name="course_id"/>
+                <field name="subject_id"/>
+                <field name="company_id"/>
+                <field name="academic_years_id"/>
+                <field name="study_plan"/>
+                <field name="batch_id"/>
+                <field name="note" sum="Acumulado"/>
+
+            </tree>
+        </field>
+    </record>
+    <!-- END VIEW TREE: Carga de Notas -->
+
+    <!-- VIEW SEARCH: Carga de Notas -->
+    <record id="note_charge_view_search" model="ir.ui.view">
+        <field name="name">note.charge.search</field>
+        <field name="model">note.charge</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="faculty_id"/>
+                <field name="vat_faculty"/>
+                <field name="student_id"/>
+                <field name="vat_student"/>
+                <field name="course_id"/>
+                <field name="subject_id"/>
+                <field name="note"/>
+            </search>
+        </field>
+    </record>
+    <!-- END VIEW SEARCH: Carga de Notas -->
+
+    <!-- ACTION: Carga de Notas -->
+    <record id="note_charge_action" model="ir.actions.act_window">
+        <field name="name">Carga de Notas</field>
+        <field name="res_model">note.charge</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Carga de Notas -->
+
+    <!-- VIEW FORM: Línea de Carga de Notas -->
+    <record id="note_charge_line_view_form" model="ir.ui.view">
+        <field name="name">note.charge.line.form</field>
+        <field name="model">note.charge.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="charge_id"/>
+                        </group>
+                        <group>
+                            <field name="note_qty"/>
+                            <field name="note_percentage"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- END VIEW FORM: Línea de Carga de Notas -->
+
+    <!-- VIEW TREE: Línea de Carga de Notas -->
+    <record id="note_charge_line_view_tree" model="ir.ui.view">
+        <field name="name">note.charge.line.tree</field>
+        <field name="model">note.charge.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top" multi_edit="1" sample="1">
+                <field name="name"/>
+                <field name="charge_id" invisible="1"/>
+                <field name="note"/>
+                <field name="note_qty" sum="Acumulado"/>
+                <field name="note_percentage"/>
+
+            </tree>
+        </field>
+    </record>
+    <!-- END VIEW TREE: Línea de Carga de Notas -->
+
+    <!-- VIEW SEARCH: Línea de Carga de Notas -->
+    <record id="note_charge_line_view_search" model="ir.ui.view">
+        <field name="name">note.charge.line.search</field>
+        <field name="model">note.charge.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="charge_id"/>
+            </search>
+        </field>
+    </record>
+    <!-- END VIEW SEARCH: Línea de Carga de Notas -->
+
+    <!-- ACTION: Línea de Carga de Notas -->
+    <record id="note_charge_line_action" model="ir.actions.act_window">
+        <field name="name">Línea de Carga de Notas</field>
+        <field name="res_model">note.charge.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Línea de Carga de Notas -->
+
+        
+<!-- ====================== MENUS ====================== -->        
+    <menuitem id="note_charge_menu"
+              name="Carga de Notas"
+              action="note_charge_action"
+              parent="openeducat_core.menu_op_school_root"
+              sequence="35"/>
+        
+
+</odoo>

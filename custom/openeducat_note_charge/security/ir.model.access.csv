@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_note_charge_group_user","note.charge.group.user","model_note_charge","base.group_user",1,1,1,1
+"access_note_charge_line_group_user","note.charge.line.user","model_note_charge_line","base.group_user",1,1,1,1
+"access_wizard_charge_note_import_group_user","wizard.charge.note.import","model_wizard_charge_note_import","base.group_user",1,1,1,1

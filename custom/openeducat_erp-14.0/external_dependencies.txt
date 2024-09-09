@@ -1,0 +1,5 @@
+https://gitlab.com/fhidalgo.dev/l10n_ve_dpt
+l10n_ve
+
+https://gitlab.com/fhidalgo.dev/partner_diverse_gender
+partner_diverse_gender

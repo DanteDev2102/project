@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_op_student_form_note_inherit" model="ir.ui.view">
+        <field name="name">op.student.form.note.inherit</field>
+        <field name="model">op.student</field>
+        <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="note_charge" string="Carga de Notas">
+                    <field name="charge_note_ids" colspan="4" readonly="1" delete="0">
+                        <tree editable="top">
+                            <field name="faculty_id" readonly="1"/>
+                            <field name="student_id" invisible="1"/>
+                            <field name="course_id" readonly="1"/>
+                            <field name="subject_id" readonly="1"/>
+                            <field name="note" sum="Acumulado" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

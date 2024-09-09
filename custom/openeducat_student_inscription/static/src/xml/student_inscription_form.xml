@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="student_inscription_form">
+                <t t-call="website.layout">
+                    <div id="student_inscription_form">
+                        <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                            <div class="container">
+                                <form action="/student-register" id="studentinscription" method="post">
+                                    <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                               	style="width: 200px">
+                                            	<span class="s_website_form_label_content">Student:</span>
+                                                <span class="s_website_form_mark" id="student" name="student" t-esc="student[0]['name']"></span>
+                                        	</label>
+                                        </div>
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                               	style="width: 200px">
+                                            	<span class="s_website_form_label_content">PNF:</span>
+                                                <span class="s_website_form_mark" id="pnf" t-esc="student[0]['pnf']" readonly="1"></span>
+                                        	</label>
+                                        </div>
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                               	style="width: 200px">
+                                            	<span class="s_website_form_label_content">Academic Year:</span>
+                                                <span class="s_website_form_mark" id="academic_year" t-esc="academic_year[0]['name']" readonly="1"></span>
+                                        	</label>
+                                        </div>
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                               	style="width: 200px">
+                                            	<span class="s_website_form_label_content">Academic Term:</span>
+                                                <span class="s_website_form_mark" id="academic_erm" t-esc="term['name']"></span>
+                                        	</label>    
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                               	style="width: 200px">
+                                            	<span class="s_website_form_label_content">UC</span>
+                                        	</label>
+                                                <button class="btn btn-primary ml-4" id="enroll" t-name="enroll" on_click="my_js_function">Enroll</button>
+                                                <table class="table table-bordered" id="courses">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Course</th>
+                                                            <th>Batch</th>
+                                                            <th>Teacher</th>    
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-foreach="courses" t-as="uc">
+                                                            <tr class="oe_even" name="uc_id" >
+                                                                <td>
+                                                                      <input name="course" t-att-value="uc['name']" readonly="1" class="border-0"/>
+                                                                </td>
+                                                                <td>
+                                                                    <select name="batch_id" t-attf-class="form-control s_website_form_input" >
+                                                                        <option value="">Batchs...</option>
+                                                                        <t t-foreach="batchs" t-as="batch">
+                                                                            <option t-att-value="batch['id']">
+                                                                                <t t-esc="batch['name']"/>
+                                                                            </option>
+                                                                        </t>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select name="teacher_id" t-attf-class="form-control s_website_form_input">
+                                                                        <option value="">Profesor...</option>
+                                                                        <t t-foreach="teachers" t-as="teacher">
+                                                                            <option t-att-value="teacher['id']">
+                                                                                <t t-esc="teacher['name']"/>
+                                                                            </option>
+                                                                        </t>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </t>
+        </template>
+    </data>
+</odoo>
+

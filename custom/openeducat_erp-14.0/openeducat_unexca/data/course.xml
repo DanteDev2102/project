@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+    <record id="pnfi" model="op.course">
+        <field name="name">PNF en Informática</field>
+        <field name="code">PNFI</field>
+    </record>
+    <record id="pnfa" model="op.course">
+        <field name="name">PNF en Administración</field>
+        <field name="code">PNFA</field>
+    </record>
+    <record id="pnft" model="op.course">
+        <field name="name">PNF en Turismo</field>
+        <field name="code">PNFT</field>
+    </record>
+    <record id="pnfdl" model="op.course">
+        <field name="name">PNF en Distribución y Logística</field>
+        <field name="code">PNFDL</field>
+    </record>
+    <record id="pnfcp" model="op.course">
+        <field name="name">PNF en Contaduría Pública</field>
+        <field name="code">PNFCP</field>
+    </record>
+    <record id="pnfee" model="op.course">
+        <field name="name">PNF en Educación Especial</field>
+        <field name="code">PNFEE</field>
+    </record>
+    <record id="pnfei" model="op.course">
+        <field name="name">PNF en Educación Inicial</field>
+        <field name="code">PNFEI</field>
+    </record>
+    <record id="ts" model="op.course">
+        <field name="name">Trabajo Social</field>
+        <field name="code">Trabajo Social</field>
+    </record>
+    <record id="eet" model="op.course">
+        <field name="name">Educación Especial (Técnica)</field>
+        <field name="code">Educación Especial (Técnica)</field>
+    </record>
+    <record id="ept" model="op.course">
+        <field name="name">Educación Preescolar (Técnica)</field>
+        <field name="code">Educación Preescolar (Técnica)</field>
+    </record>
+</odoo>

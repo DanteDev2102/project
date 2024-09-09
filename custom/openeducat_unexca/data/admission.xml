@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+    <record id="altagracia_opsu_pnfa" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - PNFA</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.pnfa"/>
+    </record>
+    <record id="altagracia_opsu_pnfi" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - PNFI</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.pnfi"/>
+    </record>
+    <record id="altagracia_opsu_pnft" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - PNFT</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.pnft"/>
+    </record>
+    <record id="altagracia_opsu_pnfdl" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - PNFDL</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.pnfdl"/>
+    </record>
+    <record id="altagracia_opsu_pnfcp" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - PNFCP</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.pnfcp"/>
+    </record>
+    <record id="altagracia_opsu_ts" model="op.admission.register">
+        <field name="name">Admisión OPSU Altagracia - Trabajo Social</field>
+        <field name="start_date">2022-09-26</field>
+        <field name="end_date">2022-10-07</field>
+        <field name="product_id" ref="openeducat_unexca.free"/>
+        <field name="min_count">0</field>
+        <field name="max_count">0</field>
+        <field name="minimum_age_criteria">0</field>
+        <field name="company_id" ref="openeducat_unexca.company_altagracia"/>
+        <field name="academic_years_id" ref="openeducat_unexca.2022_2023"/>
+        <field name="course_id" ref="openeducat_unexca.ts"/>
+    </record>
+</odoo>

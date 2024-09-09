@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="kanban_view_faculty">
+            <field name="name">Faculty Kanban</field>
+            <field name="model">op.faculty</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="image_1920"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_res_partner_kanban"><!-- The code uses HTML classes and tags to define a main container with two divisions, one for the contact's image and one with additional details such as name, address, phone, email and preferred language. These details are set using drop-down list items and input fields using Odoo's template syntax. In addition, the code uses conditional expressions to check if information is specified in the database fields, if there is, the corresponding detail will be displayed, otherwise, that detail will not be displayed. -->
+                                <div class="o_kanban_image">
+                                    <t t-if="record.image_1920.value">
+                                        <img t-att-src="kanban_image('op.faculty', 'image_1920', record.id.raw_value)"
+                                             alt="Faculty"/>
+                                    </t>
+                                    <t t-if="!record.image_1920.value">
+                                        <img t-att-src='_s + "/base/static/img/avatar.png"' alt="Faculty"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.contact_address.raw_value">
+                                            <field name="contact_address"/>
+                                        </li>
+                                        <li t-if="record.phone.raw_value">
+                                            <field name="phone"/>
+                                        </li>
+                                        <li t-if="record.mobile.raw_value">
+                                            <field name="mobile"/>
+                                        </li>
+                                        <li t-if="record.email.raw_value">
+                                            <a t-attf-href="mailto:#{record.email.value}">
+                                                <field name="email"/>
+                                            </a>
+                                        </li>
+                                        <li t-if="record.lang.raw_value">
+                                            <field name="lang"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- This is a view record in Odoo, which defines how the list of objects in the op.faculty model will be displayed in the user interface. This record defines a tree view for the op.faculty model. The tree view will include several fields from the op.faculty model, such as name, id_number, gender, email, etc. Some of the fields (such as title, blood_group, emergency_contact, main_department_id, etc.) are set as invisible and will not appear in the view. In addition, some fields (allowed_department_ids) have been configured with certain widgets that will allow multiple selection and drop-down labels in the view. A security group openeducat_core.group_multi_department has also been defined for these fields which ensures that only users with that group access will see these fields. -->
+        <record id="view_op_faculty_tree" model="ir.ui.view">
+            <field name="name">op.faculty.tree</field>
+            <field name="model">op.faculty</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Faculty">
+                    <field name="title" invisible="1"/><!-- This "invisible" attribute is used to hide a field in the view or form. In this specific case, it is hiding the "title" field in the OpFaculty tree view. -->
+                    <field name="name"/><!--The name field is the teacher's full name-->
+                    <field name="id_number" placeholder="Ej: 23123456"/><!--The id_number field is the teacher's identification number.-->
+                    <field name="gender" placeholder="Select ..."/><!--The gender field is the gender of the teacher-->
+                    <field name="diverse_gender_id"/><!--The diverse_gender_id field is a relational field to another table that contains additional gender options.-->
+                    <field name="email" placeholder="ejemplo@dominio.com" required="1"/><!--The email field is the teacher's email address and is mandatory. blood_group field is the teacher's blood group, but is hidden-->
+                    <field name="blood_group" invisible="1"/><!--blood_group field is the teacher's blood group, but is hidden-->
+                    <field name="emergency_contact" invisible="1"/><!--The emergency_contact field is an emergency contact person for the teacher, but this has also been masked out.-->
+                    <field name="main_department_id" groups="openeducat_core.group_multi_department" invisible="1"/><!--The main_department_id field is the main department to which the teacher belongs, but this has also been hidden.-->
+                    <field name="allowed_department_ids" widget="many2many_tags"
+                           groups="openeducat_core.group_multi_department" invisible="1"/><!--The allowed_department_ids field is a many2many relationship to the departments to which the teacher has access.-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_op_faculty_form" model="ir.ui.view">
+            <field name="name">op.faculty.form</field>
+            <field name="model">op.faculty</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Faculty">
+                    <header groups="openeducat_core.group_op_back_office_admin">
+                        <button name="%(faculty_create_employee_act)d" string="Create Employee" type="action"
+                                class="oe_highlight" attrs="{'invisible': [('emp_id', '!=', False)]}" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div name="smart_button" class="oe_button_box">
+
+                        </div>
+                        <field name="image_1920" widget="image" class="oe_left oe_avatar"/>
+                        <div class="oe_title w-auto">
+                            <h3>                                
+                                <field name="title" placeholder="Title" style="width: 30%%" invisible="1"/><!-- The "title" field is invisible because it has the attribute invisible="1" and has a width of 30% defined by the style attribute style="width: 30%%". -->
+                                <field name="ladder" placeholder="ladder" style="width: 30%%"/><!-- On the other hand, the "ladder" field also has a width of 30% defined by the style attribute style="width: 30%%" and displays a placeholder text "ladder". -->
+                            </h3>
+                            <h1>
+                                <field name="name" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>                                    
+                                        <td style="padding-left:10px; padding-right:10px; font-size:14px; width:25%;">
+                                            <field name="first_name" required="1" placeholder="First Name"/><!-- The first column has a text input field with the 'name' attribute set to "first_name", and the 'required' attribute set to "1" to make this field mandatory. It also has a placeholder "First Name". -->
+                                        </td>
+                                        <td style="padding-right:10px; font-size:14px; width:25%;">
+                                            <field name="middle_name" placeholder="Middle Name"/><!-- The second column has another text input field with the 'name' attribute set to "middle_name". It is not set as a required field, but has a placeholder "Middle Name". -->
+                                        </td>
+                                        <td style="padding-right:10px; font-size:14px; width:25%;">
+                                            <field name="last_name" required="1" placeholder="Last Name"/><!-- The third column also has a text entry field with the 'name' attribute set to "last_name", and is set as a required field. It has a placeholder "Last Name". -->
+                                        </td>
+                                        <td style="padding-right:10px; font-size:14px; width:25%;">
+                                            <field name="second_last_name" placeholder="Second Last Name"/><!-- The final fourth column has another text entry field with the 'name' attribute set to "second_last_name". Although this is not a required field, there may be cases where someone has two last names. It has a placeholder "second_last_name". -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group col="6" colspan="4">
+                                <field name="status_active" placeholder="Select ..."/><!-- status_active shows "Select..." as placeholder. -->
+                                <field name="disability" placeholder="Select ..." required="1"/><!--Disability field the "placeholder" attribute indicates that a text will be displayed within the field to indicate to the user what type of information is expected to be entered in that field. The "required" attribute indicates that this field is mandatory and the user must select an option before the form can be submitted.-->
+                                <field name="shift" placeholder="Select ..."/><!-- shift shows "Select..." as a placeholder. -->
+                                <field name="entry_date"/><!-- entry_date shows a calendar for selecting a specific date. -->
+                                <field name="dedication" placeholder="Select ..."/><!-- dedication shows "Select..." as a placeholder. -->
+                                <field name="number_year_service"/><!-- number_year_service is a field where the user can enter a numeric value. -->                                            
+                        </group>
+                        <notebook colspan="4">
+                            <page name="personal_information" string="Personal Information">
+                                <group col="6">
+                                    <field name="id_number" placeholder="Ej: 23123456"/><!-- This field defines a space where the user can enter a personal identification number. The text "Ex: 23123456" shows an example of the expected format to guide the user. -->
+                                    <field name="gender" placeholder="Select..."/><!-- This field allows the user to select their gender from a drop-down list. The text "Select..." is a placeholder that will disappear once the user selects an option. -->
+                                    <field name="diverse_gender_id" placeholder="Select..."/><!-- This field allows the user to select a gender option other than "male" or "female". This also uses a drop-down list with "Select..." as a placeholder. -->
+                                    <field name="phone" placeholder="Ej: 0212-1234567"/><!-- This field defines a space for the user to enter his phone number. The text "Ex: 0212-1234567" shows an example of expected formatting. -->
+                                    <field name="mobile" placeholder="Ej: 0416-1234567"/><!-- This field defines a space for the user to enter their cell phone number. Also use "Ex: 0416-1234567" as example text. -->
+                                    <field name="email" placeholder="ejemplo@dominio.com"/><!-- This field defines a space for the user to enter an email address. "ejemplo@dominio.com" is an example email address shown for reference. -->
+                                    <field name="birth_date"/><!-- This field allows the user to enter their birth date. -->
+                                    <field name="blood_group" invisible="1"/><!-- This field is defined as invisible to the user. It is probably used to collect internal information such as blood group. -->
+                                    <field name="nationality"/><!-- This field allows the user to select their nationality from a drop-down list. -->
+                                    <field name="visa_info" invisible="1"/><!-- Similar to the blood_group field, this field is defined as invisible to the user and is probably used to collect additional information. -->
+                                    <field name="lang" invisible="1"/><!-- This field is also defined as invisible to the user and is probably used to collect information about the preferred language. -->
+                                    <field name="emergency_contact" context="{'show_address': 1}"
+                                           options='{"always_reload": True}' invisible="1"/><!-- Another field defined as invisible. This field is probably used to capture emergency contact information. -->
+                                    <field name='emp_id' invisible="1"/><!-- This field is defined as invisible and is probably used to store information related to the employee. -->
+                                    <field name="main_department_id" groups="openeducat_core.group_multi_department"/><!-- This field allows the user to select the main department they belong to. -->
+                                    <field name="allowed_department_ids" widget="many2many_tags"
+                                           groups="openeducat_core.group_multi_department"/><!-- This field allows the user to select one or more departments in which they are allowed to work using "many2many" tags. -->
+                                </group>
+                                <group col="4" string="HEADQUARTESRS" name="headquarters"><!-- They allow you to activate or deactivate options for different headquarters. These fields are labeled with abbreviations, so anyone familiar with the system in which this code is used should know what these abbreviations mean and the corresponding options that are activated/deactivated by selecting one of them. -->
+                                    <field name="flr" widget="boolean_toggle"/>
+                                    <field name="alt" widget="boolean_toggle"/>
+                                    <field name="urb" widget="boolean_toggle"/>
+                                    <field name="gcy" widget="boolean_toggle"/>
+                                </group>
+                                 <group col="6" string="PNF" name="PNF"><!-- This type of grouping with Boolean fields is useful when you need to collect information that can be described as a list of discrete or mutually exclusive options, as in this case the various specialties of the National Training Program. By using a Boolean field, each option is presented as a binary selection of "Yes" or "No", which can simplify data entry by the user and reduce the possibility of errors. -->
+                                    <field name="pnfa" widget="boolean_toggle"/>
+                                    <field name="pnfc" widget="boolean_toggle"/>
+                                    <field name="pnfd" widget="boolean_toggle"/>
+                                    <field name="pnfe" widget="boolean_toggle"/>
+                                    <field name="pnfi" widget="boolean_toggle"/>
+                                    <field name="pnft" widget="boolean_toggle"/>
+                                </group>
+                                <group string="Address Detail" name="address">
+                                    <label for="type"/>
+                                    <div name="div_type" invisible="1">
+                                        <field class="oe_inline" name="type" invisible="1"/>
+                                    </div>
+                                    <label for="street" string="Address"/>
+                                    <div name="div_address">
+                                        <div name="div_address">
+                                            <field name="country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}' readonly="1"/>
+                                        </div>
+                                        <field name="street" placeholder="Street..." invisible="1"/>
+                                        <field name="street2" placeholder="Street2" style="width: 82%;"/>
+                                        <div class="address_format">
+                                            <field name="city" placeholder="City" style="width: 41%;"/><!-- creates an input field where the user can input the city. The placeholder text is set to "City" and the width of the input field is set to 41%. -->
+                                            <field name="state_id" class="oe_no_button"
+                                                   placeholder="State" style="width: 41%;" options='{"no_open": True}'/><!-- creates an input field where the user can select the state from a list. The width of the dropdown list is set to 41%, and the option options='{"no_open": True}' disables opening the dropdown with click on it. -->
+                                            <field name="zip" placeholder="ZIP" style="width: 20%%" invisible="1"/><!-- creates an input field where the user can input the zip (postal) code. The placeholder text is set to "ZIP". This line also makes this input field invisible as invisible="1" makes that happens. -->
+                                        </div>
+                                        <field name="municipality_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': 'True'}" nolabel="1" placeholder="Municipality" string="Municipality" domain="[('state_id', '=', state_id)]" attrs="{'invisible': [('country_id', '!=', %(base.ve)s)]}" style="width: 41%;"/><!-- Displays a selection field with filtered options based on the value of the state_id field. Attributes are also set to make the field invisible when the value of the country_id field is not equal to base.ve (possibly an abbreviation for Venezuela). In addition, new municipality entries are not allowed to be created, they can only be selected from the options provided. -->
+                                        <field name="parish_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': 'True'}" placeholder="Parish" domain="[('municipality_id', '=', municipality_id)]" nolabel="0" attrs="{'invisible': [('country_id', '!=', %(base.ve)s)]}" style="width: 41%;"/><!-- Displays a field similar to the previous one, but this time to select a parish. The options are filtered according to the value of the municipality_id field. As in the previous field, this field also becomes invisible when country_id is not equal to base.ve. -->
+                                    </div>
+                                </group>
+                            </page>
+                            <page name="subjects" string="Subjects">
+                                <field name="faculty_subject_ids" colspan="4" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_faculty_search" model="ir.ui.view">
+            <field name="name">op.faculty.search</field>
+            <field name="model">op.faculty</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Faculty">
+                    <field name="name"/>
+                    <field name="blood_group"/>
+                    <field name="main_department_id"/>
+                    <field name="allowed_department_ids"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="blood_group" string="Blood Group" domain="[]"
+                                context="{'group_by':'blood_group'}"/>
+                        <filter name="nationality" string="Nationality" domain="[]"
+                                context="{'group_by':'nationality'}"/>
+                        <filter name="language" string="Language" domain="[]" context="{'group_by':'lang'}"/>
+                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_faculty_view">
+            <field name="name">Faculties</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.faculty</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_op_faculty_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_faculty_view_form">
+            <field name="act_window_id" ref="act_open_op_faculty_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_faculty_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_faculty_view_tree">
+            <field name="act_window_id" ref="act_open_op_faculty_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_op_faculty_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_faculty_view_kanban">
+            <field name="act_window_id" ref="act_open_op_faculty_view"/>
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_faculty"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_faculty_view_2">
+            <field name="name">Faculties</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.faculty</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_op_faculty_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</odoo>

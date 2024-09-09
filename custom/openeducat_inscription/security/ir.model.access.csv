@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_sigu_inscription_group_user","sigu.inscription.group.user","model_sigu_inscription","base.group_user",1,1,1,1
+"access_sigu_inscription_line_group_user","sigu.inscription.line.group.user","model_sigu_inscription_line","base.group_user",1,1,1,1

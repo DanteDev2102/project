@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- VIEW FORM: Inscripción -->
+    <record id="sigu_inscription_view_form" model="ir.ui.view">
+        <field name="name">sigu.inscription.form</field>
+        <field name="model">sigu.inscription</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <group>
+                        <group>
+                            <field name="academic_year_id"/>
+                            <field name="student_id"/>
+                        </group>
+                        <group>
+                            <field name="course_id"/>
+                        </group>
+                    </group>
+                    
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- END VIEW FORM: Inscripción -->
+
+    <!-- VIEW TREE: Inscripción -->
+    <record id="sigu_inscription_view_tree" model="ir.ui.view">
+        <field name="name">sigu.inscription.tree</field>
+        <field name="model">sigu.inscription</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1" sample="1">
+                <field name="academic_year_id"/>
+                <field name="student_id"/>
+                <field name="course_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- END VIEW TREE: Inscripción -->
+
+    <!-- VIEW SEARCH: Inscripción -->
+    <record id="sigu_inscription_view_search" model="ir.ui.view">
+        <field name="name">sigu.inscription.search</field>
+        <field name="model">sigu.inscription</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="academic_year_id"/>
+                <field name="student_id"/>
+                <field name="course_id"/>
+            </search>
+        </field>
+    </record>
+    <!-- END VIEW SEARCH: Inscripción -->
+
+    <!-- ACTION: Inscripción -->
+    <record id="sigu_inscription_action" model="ir.actions.act_window">
+        <field name="name">Inscripción</field>
+        <field name="res_model">sigu.inscription</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Inscripción -->
+
+        
+<!-- ====================== MENUS ====================== -->        
+    <menuitem id="sigu_inscription_menu"
+              name="Inscripción"
+              action="sigu_inscription_action"
+              sequence="35"
+              web_icon="openeducat_inscription,static/description/icon.png"
+    />
+        
+
+</odoo>

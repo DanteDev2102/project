@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="wizard_charge_note_import" model="ir.ui.view">
+            <field name="name">Wizard charge_note Import</field>
+            <field name="model">wizard.charge.note.import</field>
+            <field name="arch" type="xml">
+                <form string="Asistente de importacion de notas">
+                    <sheet>
+                        <group>
+                            <field name="faculty_id"/>
+                            <field name="course_id"/>
+                            <field name="subject_id"/>
+                            <field name="turn"/>
+                            <field name="academic_years_id"/>
+                            <field name="company_id"/>
+                            <field name="file"/>
+                        </group>
+                        <footer>
+                            <button name="cancel" string="Cancelar" special="cancel" class="btn-secondary"/>
+                            <button name="import_charge_note_data" string="Importar" type="object" class="btn-primary"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="wizard_charge_note_import_action" model="ir.actions.act_window">
+            <field name="name">Wizard Charge Note Import Action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.charge.note.import</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+        <menuitem id="wizard_charge_note_menu_import_action"
+                  name="Importación de notas" parent="openeducat_core.menu_op_school_root"
+                  sequence="36"
+                  action="wizard_charge_note_import_action"/>
+</odoo>

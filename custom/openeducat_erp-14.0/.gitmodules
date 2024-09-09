@@ -1,0 +1,8 @@
+[submodule "l10n_ve_dpt"]
+	path = l10n_ve_dpt
+	url = https://gitlab.com/fhidalgo.dev/l10n_ve_dpt
+	branch = 14.0
+[submodule "partner_diverse_gender"]
+	path = partner_diverse_gender
+	url = https://gitlab.com/fhidalgo.dev/partner_diverse_gender
+	branch = 14.0

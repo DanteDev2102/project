@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ACTION: Inscripción -->
+    <record id="sigu_student_inscription_line_action" model="ir.actions.act_window">
+        <field name="name">Inscripción</field>
+        <field name="res_model">sigu.student.inscription.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Inscripción -->
+
+        
+<!-- ====================== MENUS ====================== -->        
+    <menuitem id="sigu_inscription_line_menu"
+              name="Student Inscripción line"
+              action="sigu_student_inscription_line_action"
+              sequence="35"
+              web_icon="openeducat_inscription,static/description/icon.png"
+    />
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_partner_diverse_gender_form" model="ir.ui.view">
+        <field name="name">partner.diverse.gender.form</field>
+        <field name="model">partner.diverse.gender</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Partner Diverse Gender">
+            <group col="4" colspan="2">
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_partner_diverse_gender_tree" model="ir.ui.view">
+        <field name="name">partner.diverse.gender.tree</field>
+        <field name="model">partner.diverse.gender</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Partner Diverse Gender" multi_edit="1" editable="top">
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_partner_diverse_gender" model="ir.actions.act_window">
+        <field name="name">Diverse Gender</field>
+        <field name="res_model">partner.diverse.gender</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('active', 'in', [False, True])]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+        
+    <menuitem name="Diverse Gender"
+              id="menu_partner_diverse_gender"
+              action="action_partner_diverse_gender"
+              parent="contacts.res_partner_menu_config"
+              sequence="10"/>
+        
+</odoo>

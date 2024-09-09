@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+    <record id="2022_2023" model="op.academic.year">
+        <field name="name">Periódo 2022-2023</field>
+        <field name="term_structure">two_sem</field>
+        <field name="start_date">2022-10-01</field>
+        <field name="end_date">2023-06-30</field>
+    </record>
+</odoo>

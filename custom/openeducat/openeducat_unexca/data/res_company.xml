@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+    <record id="base.main_company" model="res.company">
+        <field name="name">UNEXCA Núcleo La Floresta</field>
+        <field name="street">Urbanización La Floresta, Parroquia Chacao, Municipio Chacao</field>
+        <field name="report_header">Universidad Nacional Experimental de la Gran Caracas</field>
+        <field name="zip"></field>
+        <field name="city">Caracas</field>
+        <field name="phone"></field>
+        <field name="email"></field>
+        <field name="website"></field>
+        <field name="logo" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+        <field name="favicon" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+    </record>
+    <record id="company_altagracia" model="res.company">
+        <field name="name">UNEXCA Núcleo Altagracia</field>
+        <field name="street">Esquina Mijares, Avenida Oeste 3, Altagracia, Caracas 1010, 1010, Distrito Capital</field>
+        <field name="report_header">Universidad Nacional Experimental de la Gran Caracas</field>
+        <field name="zip">1010</field>
+        <field name="city">Caracas</field>
+        <field name="phone"></field>
+        <field name="email"></field>
+        <field name="website"></field>
+        <field name="logo" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+        <field name="favicon" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+    </record>
+    <record id="company_urbina" model="res.company">
+        <field name="name">UNEXCA Núcleo La Úrbina</field>
+        <field name="street">Calle 8, Zona Industrial, Edificio Mercurio, Caracas 1073, Distrito Capital</field>
+        <field name="report_header">Universidad Nacional Experimental de la Gran Caracas</field>
+        <field name="zip">1073</field>
+        <field name="city">Caracas</field>
+        <field name="phone"></field>
+        <field name="email"></field>
+        <field name="website"></field>
+        <field name="logo" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+        <field name="favicon" type="base64" file="openeducat_unexca/static/description/logo.jpg"/>
+    </record>
+</odoo>
