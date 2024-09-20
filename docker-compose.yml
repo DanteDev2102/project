@@ -4,7 +4,7 @@ services:
       build:
          context: .
       container_name: ${PROJECT_NAME}
-      command: odoo -u openeducat_student_inscription --dev=all
+      command: odoo -u student_inscription --dev=all
       depends_on:
          - db
       ports:

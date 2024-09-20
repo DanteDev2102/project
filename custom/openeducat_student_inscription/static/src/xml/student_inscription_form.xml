@@ -56,7 +56,7 @@
                                                         <t t-foreach="courses" t-as="uc">
                                                             <tr class="oe_even" name="uc_id" >
                                                                 <td>
-                                                                      <input name="course" t-att-value="uc['name']" readonly="1" class="border-0"/>
+                                                                    <input name="course" t-att-value="uc['name']" readonly="1" class="border-0"/>
                                                                 </td>
                                                                 <td>
                                                                     <select name="batch_id" t-attf-class="form-control s_website_form_input" >

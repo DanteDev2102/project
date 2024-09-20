@@ -1,0 +1,32 @@
+<odoo>
+    <record id="op_session_wizard_form" model="ir.ui.view">
+        <field name="name">op.session.report.wizard</field>
+        <field name="model">op.session.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Session Report">
+                <group>
+                    <button name="print_session_report" string="Print Excel report" class="btn-primary" type="object"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="op_session_wizard_action" model="ir.actions.act_window">
+        <field name="name">Session Wizard</field>
+        <field name="res_model">op.session.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="op_session_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_op_session_form" model="ir.ui.view">
+        <field name="name">view.op.session.form</field>
+        <field name="model">op.session</field>
+        <field name="inherit_id" ref="openeducat_timetable.view_op_session_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="after">
+                <button name="action_excel_data" class="btn-primary" string="Print Excel" type="object"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

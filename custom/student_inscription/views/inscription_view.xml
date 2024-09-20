@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="op_inscription_action_view_tree" model="ir.ui.view">
+        <field name="name">op_inscription_view_tree</field>
+        <field name="model">op.inscription</field>
+        <field name="arch" type="xml">
+            <tree string="Student Inscription">
+                <field name="student_id" />
+                <field name="academic_year_id" />
+                <field name="academic_term_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="op_inscription_action_view_form" model="ir.ui.view">
+        <field name="name">op_inscription_view_form</field>
+        <field name="model">op.inscription</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group >
+                        <field name="student_id" />
+                        <field name="academic_year_id" />
+                        <field name="academic_term_id" />
+                        <field name="student_id_number" />
+                    </group>
+                        <notebook>
+                            <page name="UC" string="Sessions">
+                                <field name="session_ids">
+                                    <tree editable="bottom" >
+                                        <field name="subject_id" />
+                                        <field name="subject_credits"/>
+                                        <field name="classroom_id" />
+                                        <field name="timing_id" />
+                                        <field name="type" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION: Inscripción -->
+    <record id="op_inscription_action" model="ir.actions.act_window">
+        <field name="name">Student Inscripción</field>
+        <field name="res_model">op.inscription</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new record
+          </p>
+        </field>
+    </record>
+    <!-- END ACTION: Inscripción -->
+
+        
+<!-- ====================== MENUS ====================== -->        
+    <menuitem id="op_student_inscription_menu"
+              name="Student Inscripción"
+              action="op_inscription_action"
+              sequence="10"
+    />
+</odoo>
