@@ -1,7 +1,8 @@
-from odoo import models, fields, _
-from odoo import http
-from odoo.http import requests
-from odoo.exceptions import UserError, ValidationError
+from odoo import models, fields, api
+
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class SessionWizard(models.TransientModel):
@@ -14,16 +15,10 @@ class SessionWizard(models.TransientModel):
         default=lambda self: self.env.context.get("active_id"),
     )
 
-    def send_data(self):
-        data = {
-            "session_id": self.session_id.id,
-            # Otros datos aquí
+    @api.depends("session_id")
+    def print_session_report(self):
+        return {
+            "type": "ir.actions.act_url",
+            "target": "new",
+            "url": "/session/xls_report?id=%s" % self.session_id["id"],
         }
-        url = "/send_data"
-        try:
-            response = requests.post(url, json=data)
-            response.raise_for_status()  # Levanta una excepción si la solicitud falla
-        except requests.exceptions.RequestException as e:
-            # Maneja los errores
-            raise UserError(_("Error sending data: %s") % e)
-        return {"type": "ir.actions.act_window_close"}

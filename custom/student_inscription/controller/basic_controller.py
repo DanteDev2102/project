@@ -4,7 +4,7 @@ from io import BytesIO
 import xlsxwriter
 import logging
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 class BasicControllerXlsxReport(http.Controller):
@@ -19,7 +19,7 @@ class BasicControllerXlsxReport(http.Controller):
 
     def _prepare_table(self, ws, data, kw, wb):
         ws.add_table(
-            f"B5:G{len(data) + 5}",
+            f"B16:C{len(data) + 16}",
             {
                 "columns": self._prepare_table_headers(kw.get("type"), wb=wb),
                 "data": self._prepare_data_table(data=data, kw=kw),
@@ -38,10 +38,7 @@ class BasicControllerXlsxReport(http.Controller):
         self._prepare_table(ws=worksheet, data=data, kw=kw, wb=workbook)
         self._prepare_footer_report(wb=workbook, ws=worksheet, kw=kw, req=request)
 
-        worksheet.autofit()
+        # worksheet.autofit()
         workbook.close()
 
         return report.getvalue()
-
-    def _format_date_str(self, date: str):
-        return datetime.strptime(date, "%Y-%m-%d").strftime("%d/%m/%Y")
