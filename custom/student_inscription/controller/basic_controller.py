@@ -38,7 +38,7 @@ class BasicControllerXlsxReport(http.Controller):
         self._prepare_table(ws=worksheet, data=data, kw=kw, wb=workbook)
         self._prepare_footer_report(wb=workbook, ws=worksheet, kw=kw, req=request)
 
-        # worksheet.autofit()
+        worksheet.autofit()
         workbook.close()
 
         return report.getvalue()

@@ -21,4 +21,5 @@ class SessionWizard(models.TransientModel):
             "type": "ir.actions.act_url",
             "target": "new",
             "url": "/session/xls_report?id=%s" % self.session_id["id"],
+            # pasamos el id por parametro en el url ?id=%s
         }

@@ -21,11 +21,13 @@ class MyController(BasicControllerXlsxReport):
         csrf=False,
     )
     def send_data(self, **kw):
+        # obtenemos el id de la session y hacemos unabusqueda de ella
         session_id = kw["id"]
         session = request.env["op.session"].sudo()
         data = session.search_read([("id", "=", session_id)])[0][
             "student_inscription_ids"
         ]
+        # retornamos el archivo excel
         return request.make_response(
             self.get_report(kw, request, data),
             headers=[
@@ -40,6 +42,7 @@ class MyController(BasicControllerXlsxReport):
             ],
         )
 
+    # Aqui preparamos los datos de la cabecera
     def _prepare_header_report(self, wb, ws, kw, req):
         header_format = wb.add_format(
             {"bold": True, "align": "center", "bg_color": "#ffffff"}
@@ -58,7 +61,7 @@ class MyController(BasicControllerXlsxReport):
         result = (
             request.env["op.session"].sudo().search_read([("id", "=", kw["id"])])[0]
         )
-
+        # cargamos la informacion por el registro a imprimir
         ws.write(5, 2, _("Faculty:"))
         ws.write(5, 3, _(result["faculty_id"][1]))
         ws.write(6, 2, _("Course"))
@@ -85,6 +88,7 @@ class MyController(BasicControllerXlsxReport):
         ws.write(10, 6, _("Students:"))
         ws.write(10, 7, _(result["n_student"]))
 
+    # definimos la cabecera de nuestra "tabla" para mostrar los estudiantes
     def _prepare_table_headers(self, type, wb):
 
         table_header_format = wb.add_format({"bold": True})
@@ -100,6 +104,7 @@ class MyController(BasicControllerXlsxReport):
             },
         ]
 
+    # Pasamos los datos a la tabla
     def _prepare_data_table(self, data, kw):
         result = (
             request.env["op.session"].sudo().search_read([("id", "=", kw["id"])])[0]

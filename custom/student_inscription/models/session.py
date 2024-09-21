@@ -65,6 +65,7 @@ class OpSession(models.Model):
                     _("This section has reached the maximum number of students")
                 )
 
+    # se envian el id del registro al wizard
     def action_excel_data(self):
         return {
             "type": "ir.actions.act_window",
