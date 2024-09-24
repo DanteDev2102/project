@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="assets_frontend" name="Student Inscription Assets"  inherit_id ="web.assets_frontend">
-    <xpath expr="." position="inside">
+    <template id="assets_frontend" name="Student Inscription Assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
             <script type="text/javascript" src="/openeducat_student_inscription/static/src/js/student_inscription.js"/>
         </xpath>
     </template>

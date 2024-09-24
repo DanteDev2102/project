@@ -1,3 +1,6 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_sigu_student_inscription_group_user","sigu.student.inscription.group.user","model_sigu_student_inscription","base.group_user",1,1,1,1
-"access_sigu_student_inscription_line_group_user","sigu.student.inscription.line.group.user","model_sigu_student_inscription_line","base.group_user",1,1,1,1
+"access_op_inscription_group_user","op.inscription.group.user","model_op_inscription","base.group_portal",1,1,1,1
+"access_op_attendance_sheet_group_user","op.attendance.sheet.group.user","openeducat_attendance.model_op_attendance_sheet","base.group_portal",1,1,1,1
+"access_op_session_group_user","op.session.group.user","openeducat_timetable.model_op_session","base.group_portal",1,1,1,1
+"access_op_inscription_group_user","op.inscription.group.user","model_op_inscription","base.group_user",1,1,1,1
+"access_op_session_wizard_group_user","op.session.wizard.group.user","model_op_session_wizard","base.group_user",1,1,1,1

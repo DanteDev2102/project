@@ -1,135 +1,106 @@
-odoo.define('my_module', function (require) {
-    'use strict';
+odoo.define('student_inscription', function (require) {
+    "use strict";
 
-    var rpc = require('web.rpc');
+    const core = require('web.core');
+    const rpc = require('web.rpc');
+    const _t = core._t
 
-    const $form = document.getElementById("studentinscription");
-
-    // document.getElementById('enroll').addEventListener('click', function (e) {
-    //     e.preventDefault()
-
-
-    //     // Access form elements
-    //     const studentElement = document.getElementById('student');
-    //     const pnfElement = document.getElementById('pnf');
-    //     const academicYearElement = document.getElementById('academic_year');
-    //     const academicTermElement = document.getElementById('academic_erm');
-
-    //     // Extract data
-    //     const studentName = studentElement.textContent;
-    //     const pnf = pnfElement.textContent;
-    //     const academicYear = academicYearElement.textContent;
-    //     const academicTerm = academicTermElement.textContent;
-
-    //     // Do something with the extracted data
-    //     // console.log('Student:', studentName);
-    //     // console.log('PNF:', pnf);
-    //     // console.log('Academic Year:', academicYear);
-    //     // console.log('Academic Term:', academicTerm);
-
-    //     const coursesTable = document.getElementById('courses');
-    //     const rows = coursesTable.querySelectorAll('tbody tr');
-
-    //     const courseData = [];
-
-    //     rows.forEach(row => {
-    //         const courseName = row.querySelector('td:nth-child(1) input').value;
-    //         const batchId = row.querySelector('td:nth-child(2) select').value;
-    //         const teacherId = row.querySelector('td:nth-child(3) select').value;
-    //         if (batchId != "" && teacherId != "") {
-    //             courseData.push({
-    //                 courseName,
-    //                 batchId,
-    //                 teacherId
-    //             });
-    //         }
-    //     });
-
-    //     // console.log('Course Data:', courseData);
-    //     const data = {
-    //         student_name: studentName,
-    //         pnf: pnf,
-    //         academic_year: academicYear,
-    //         academic_term: academicTerm,
-    //         courses: courseData
-    //     };
-    //     // console.log(rpcData)
-    //     // fetch('/student-register/', {
-    //     //     method: 'POST',
-    //     //     headers: {
-    //     //         'Content-Type': 'application/json'
-    //     //     },
-    //     //     body: JSON.stringify(rpcData)
-    //     // })
-
-    // });
-
-
-    $form.addEventListener('submit', function (e) {
+    const $from = document.getElementById("studentinscription")
+    //submit del form
+    $from.addEventListener('submit', function (e) {
+        //prevenimos el submit para poder ejecutar nuestra logica
         e.preventDefault()
 
+        //nos traemos nuestra tabla y seleccionamos el body de nuestra tabla por cada fila
         const coursesTable = document.getElementById('courses');
         const rows = coursesTable.querySelectorAll('tbody tr');
 
-        const courseData = [];
-
+        /*recorremos cada fila que es nuestra materios y verificamos si se selecciono una session
+        para esta materia en el caso de hacerlo se agrega en un array, en caso contrario no se hace nada */
+        const sessionData = [];
         rows.forEach(row => {
-            const courseName = row.querySelector('td:nth-child(1) input').value;
-            const batchId = row.querySelector('td:nth-child(2) select').value;
-            const teacherId = row.querySelector('td:nth-child(3) select').value;
-            if (batchId != "" && teacherId != "") {
-                courseData.push({
-                    courseName,
-                    batchId,
-                    teacherId
+            const session = row.querySelector('td:nth-child(3) select').value;
+            if (session != "") {
+                sessionData.push({
+                    session,
                 });
             }
         });
 
-        const formatCourses = courseData.map((course) => ({
-            name: course.courseName,
-            batchId: +course.batchId,
-            teacherId: +course.teacherId
+        //formateamos mejor nuestro array para poder leerlo de mejor forma
+        const formatSession = sessionData.map((session) => ({
+            id: session.session,
         }))
 
-        formatCourses.forEach((course, index) => {
-            const $inputName = document.createElement('input')
-            const $inputBatch = document.createElement('input')
-            const $inputTeacher = document.createElement('input')
+        //falta comentar
+        formatSession.forEach((session, index) => {
+            const $inputSession = document.createElement('input');
 
-            const name = `name-${index + 1}`;
-            const batch = `batch-${index + 1}`;
-            const teacher = `teacher-${index + 1}`;
+            const sess = `id-${index + 1}`;
 
-            $inputName.name = name;
-            $inputName.id = name;
-            $inputName.style.visibility = "hidden";
-            $inputName.value = course.name;
-            $form.appendChild($inputName)
-
-            $inputBatch.name = batch;
-            $inputBatch.id = batch;
-            $inputBatch.style.visibility = "hidden";
-            $inputBatch.value = course.batchId;
-            $form.appendChild($inputBatch)
-
-            $inputTeacher.name = teacher;
-            $inputTeacher.id = teacher;
-            $inputTeacher.style.visibility = "hidden";
-            $inputTeacher.value = course.teacherId;
-            $form.appendChild($inputTeacher)
-
-
+            $inputSession.name = sess;
+            $inputSession.id = sess;
+            $inputSession.style.visibility = "hidden";
+            $inputSession.value = session.id;
+            $from.appendChild($inputSession)
         })
-
+        //falta comentar
         const $inputLen = document.createElement('input')
         const len = 'Len'
         $inputLen.name = "len";
         $inputLen.id = "len";
         $inputLen.style.visibility = "hidden";
-        $inputLen.value = formatCourses.length;
-        $form.appendChild($inputLen)
+        $inputLen.value = formatSession.length;
+        $from.appendChild($inputLen);
 
-        $form.submit()
+        $from.submit()
+    })
+
+
+
+    $from.addEventListener('click', async function (e) {
+        //nos traemos nuestra tabla y seleccionamos el body de nuestra tabla por cada fila
+        const coursesTable = document.getElementById('courses');
+        const rows = coursesTable.querySelectorAll('tbody tr');
+        //nos traemos todas las sessiones en un arreglo
+        const sessions = await rpc.query({
+            'model': 'op.session',
+            'method': 'search_read',
+            'arg': [],
+            "fields": ["classroom_id", "headquarters", "start_datetime", "faculty_id", "end_datetime", "type"] // type es el dia de se la session, dia de clase
+        })
+        //por cada linea hacemos una busqueda por el id seleccionado para que muestre informacion
+        rows.forEach(row => {
+            const $currentRow = row.querySelector('td:nth-child(3) select').value;
+            if ($currentRow != '') {
+                // se cambia el valor del id de string a int
+                const id = parseInt($currentRow)
+                //se realiza la busqueda para la session seleccionada
+                const class_s = sessions.find(e => e.id == id)
+                //Formateo la hora
+                const start_split = class_s.start_datetime.split(' ')[1].split(':')
+                const start_hour = `${start_split[0]}:${start_split[1]}`
+                const end_split = class_s.end_datetime.split(' ')[1].split(':')
+                const end_hour = `${end_split[0]}:${end_split[1]}`
+                //obtengo la fila donde estoy parado y asigno los valores a cada columna
+                row.querySelector('td:nth-child(4) span').innerText = `${class_s.faculty_id[1]}`
+                row.querySelector('td:nth-child(5) span').innerText = `${class_s.headquarters}`
+                row.querySelector('td:nth-child(6) span').innerText = `${start_hour}`
+                row.querySelector('td:nth-child(7) span').innerText = `${end_hour}`
+                row.querySelector('td:nth-child(8) span').innerText = `${class_s.classroom_id[1]}`
+                row.querySelector('td:nth-child(9) span').innerText = `${class_s.type}`
+
+            } else {
+                /*obtengo la fila donde estoy parado y asigno los valores a cada columna ya que
+                no se selecciono niguna*/
+                const $currentRow = e.target.closest('tr')
+                row.querySelector('td:nth-child(4) span').innerText = ``
+                row.querySelector('td:nth-child(5) span').innerText = ``
+                row.querySelector('td:nth-child(6) span').innerText = ``
+                row.querySelector('td:nth-child(7) span').innerText = ``
+                row.querySelector('td:nth-child(8) span').innerText = ``
+                row.querySelector('td:nth-child(9) span').innerText = ``
+            }
+        })
     })
 });

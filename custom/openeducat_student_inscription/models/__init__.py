@@ -1,3 +1,4 @@
-from . import student_inscription
-from . import student_inscription_line
-from . import subject
+from . import course
+from . import session
+from . import inscription
+from . import student
