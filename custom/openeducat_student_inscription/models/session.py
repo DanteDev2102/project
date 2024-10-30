@@ -36,6 +36,11 @@ class OpSession(models.Model):
         compute="_compute_student_register",
     )
 
+    max_student = fields.Integer(
+        readonly=True,
+        default=30,
+    )
+
     @api.depends("student_inscription_ids")
     def _compute_student_register(self):
         for record in self:
@@ -60,7 +65,7 @@ class OpSession(models.Model):
     @api.constrains("student_inscription_ids")
     def _check_limit_student(self):
         for rec in self:
-            if len(rec.student_inscription_ids) >= 30:
+            if len(rec.student_inscription_ids) > rec.max_student:
                 raise ValidationError(
                     _("This section has reached the maximum number of students")
                 )
