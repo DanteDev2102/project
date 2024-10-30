@@ -109,7 +109,6 @@ class MyController(BasicControllerXlsxReport):
         result = (
             request.env["op.session"].sudo().search_read([("id", "=", kw["id"])])[0]
         )
-        n_students = result["n_student"]
         students_ids = result["student_inscription_ids"]
         students_data = []
         for student_id in students_ids:
